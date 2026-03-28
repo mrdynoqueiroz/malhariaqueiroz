@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Malharia Queiroz — Uniformes & Camisetas Premium</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Cormorant+Garamond:wght@300;400;500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A84C; --gold-light: #E2C47A; --gold-pale: #F5E6C0;
+    --black: #080808; --dark: #111111; --dark2: #1a1a1a; --dark3: #242424;
+    --cream: #F5F0E8; --white: #ffffff; --text-muted: #888880;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--black); color: var(--cream); font-family: 'Jost', sans-serif; font-weight: 300; overflow-x: hidden; }
+
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1.2rem 4rem; transition: all 0.4s ease; border-bottom: 1px solid transparent; }
+  nav.scrolled { background: rgba(8,8,8,0.96); border-bottom-color: rgba(201,168,76,0.2); backdrop-filter: blur(12px); padding: 0.9rem 4rem; }
+  .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .nav-logo svg { width: 44px; height: 44px; }
+  .nav-logo-title { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 600; color: var(--gold); letter-spacing: 0.04em; }
+  .nav-logo-sub { font-size: 0.62rem; color: var(--text-muted); letter-spacing: 0.18em; text-transform: uppercase; }
+  .nav-links { display: flex; align-items: center; gap: 2.5rem; list-style: none; }
+  .nav-links a { color: rgba(245,240,232,0.7); text-decoration: none; font-size: 0.8rem; letter-spacing: 0.14em; text-transform: uppercase; transition: color 0.3s; }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-cta { background: transparent; border: 1px solid var(--gold); color: var(--gold) !important; padding: 0.5rem 1.2rem; border-radius: 2px; font-size: 0.75rem !important; }
+  .nav-cta:hover { background: var(--gold) !important; color: var(--black) !important; }
+
+  #inicio { min-height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; padding: 6rem 2rem 4rem; }
+  .hero-bg { position: absolute; inset: 0; background: var(--black); z-index: 0; }
+  .hero-bg::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(201,168,76,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(201,168,76,0.04) 1px, transparent 1px); background-size: 60px 60px; }
+  .hero-bg::after { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 70% 70% at 50% 50%, rgba(201,168,76,0.06) 0%, transparent 70%); }
+  .hero-line { position: absolute; top: 0; right: 25%; width: 1px; height: 100%; background: linear-gradient(to bottom, transparent, rgba(201,168,76,0.3), transparent); z-index: 1; }
+  .hero-content { position: relative; z-index: 2; text-align: center; max-width: 900px; }
+  .hero-tag { display: inline-block; font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); border: 1px solid rgba(201,168,76,0.35); padding: 0.4rem 1.4rem; border-radius: 2px; margin-bottom: 2.5rem; animation: fadeUp 0.8s ease both; }
+  .hero-logo-big { margin-bottom: 1.5rem; animation: fadeUp 0.8s 0.15s ease both; }
+  .hero-logo-big svg { width: 120px; height: 120px; }
+  .hero-title { font-family: 'Playfair Display', serif; font-size: clamp(2.8rem, 6vw, 5.2rem); font-weight: 600; line-height: 1.1; color: var(--cream); margin-bottom: 0.5rem; animation: fadeUp 0.8s 0.25s ease both; }
+  .hero-title em { font-style: italic; color: var(--gold); }
+  .hero-sub { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.1rem, 2.2vw, 1.45rem); font-weight: 300; color: rgba(245,240,232,0.6); max-width: 600px; margin: 0 auto 3rem; line-height: 1.7; animation: fadeUp 0.8s 0.35s ease both; }
+  .hero-actions { display: flex; align-items: center; justify-content: center; gap: 1rem; flex-wrap: wrap; animation: fadeUp 0.8s 0.45s ease both; }
+  .hero-scroll { position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%); z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 8px; animation: fadeUp 1s 0.8s ease both; }
+  .hero-scroll span { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); }
+  .scroll-line { width: 1px; height: 40px; background: linear-gradient(to bottom, var(--gold), transparent); animation: scrollPulse 1.8s ease-in-out infinite; }
+
+  section { padding: 7rem 2rem; }
+  .section-tag { font-size: 0.68rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); display: flex; align-items: center; gap: 12px; margin-bottom: 1.2rem; }
+  .section-tag::after { content: ''; flex: 0 0 40px; height: 1px; background: var(--gold); opacity: 0.5; }
+  .section-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 600; line-height: 1.15; color: var(--cream); margin-bottom: 1.5rem; }
+  .section-title em { font-style: italic; color: var(--gold); }
+  .section-desc { font-size: 1rem; line-height: 1.8; color: rgba(245,240,232,0.6); max-width: 540px; }
+  .container { max-width: 1200px; margin: 0 auto; }
+
+  #sobre { background: var(--dark); }
+  .sobre-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
+  .sobre-box { background: var(--dark2); border: 1px solid rgba(201,168,76,0.15); border-radius: 3px; padding: 3rem; position: relative; }
+  .sobre-box::before { content: '"MQ"'; font-family: 'Playfair Display', serif; font-size: 8rem; font-style: italic; color: rgba(201,168,76,0.06); position: absolute; top: -1rem; left: 1rem; line-height: 1; pointer-events: none; }
+  .sobre-stat { margin-bottom: 2rem; padding-bottom: 2rem; border-bottom: 1px solid rgba(201,168,76,0.1); }
+  .sobre-stat:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+  .sobre-stat-num { font-family: 'Playfair Display', serif; font-size: 3rem; font-weight: 600; color: var(--gold); line-height: 1; margin-bottom: 0.3rem; }
+  .sobre-stat-label { font-size: 0.78rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted); }
+  .sobre-diferenciais { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2.5rem; }
+  .diferencial-card { background: var(--dark3); border: 1px solid rgba(201,168,76,0.12); border-radius: 3px; padding: 1.2rem; transition: border-color 0.3s, transform 0.3s; }
+  .diferencial-card:hover { border-color: rgba(201,168,76,0.4); transform: translateY(-3px); }
+  .diferencial-icon { font-size: 1.4rem; margin-bottom: 0.6rem; }
+  .diferencial-title { font-size: 0.82rem; font-weight: 600; color: var(--cream); margin-bottom: 0.3rem; }
+  .diferencial-desc { font-size: 0.75rem; color: var(--text-muted); line-height: 1.6; }
+
+  #malhas { background: var(--black); }
+  .malhas-header { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: end; margin-bottom: 4rem; }
+  .malhas-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5px; }
+  .malha-card { background: var(--dark2); padding: 2rem 1.8rem; transition: all 0.35s; position: relative; overflow: hidden; }
+  .malha-card::before { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: var(--gold); transform: scaleX(0); transform-origin: left; transition: transform 0.35s ease; }
+  .malha-card:hover { background: var(--dark3); }
+  .malha-card:hover::before { transform: scaleX(1); }
+  .malha-num { font-family: 'Playfair Display', serif; font-size: 3rem; font-weight: 600; color: rgba(201,168,76,0.15); line-height: 1; margin-bottom: 1rem; transition: color 0.3s; }
+  .malha-card:hover .malha-num { color: rgba(201,168,76,0.35); }
+  .malha-name { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 600; color: var(--cream); margin-bottom: 0.5rem; }
+  .malha-comp { font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
+  .malha-desc { font-size: 0.85rem; line-height: 1.7; color: rgba(245,240,232,0.55); margin-bottom: 1.2rem; }
+  .malha-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .malha-tag { font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; border: 1px solid rgba(201,168,76,0.25); color: rgba(201,168,76,0.7); padding: 3px 8px; border-radius: 2px; }
+
+  #servicos { background: var(--dark); }
+  .servicos-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(201,168,76,0.08); margin-bottom: 1px; }
+  .servico-item { background: var(--dark); padding: 2.5rem 2rem; transition: background 0.3s; }
+  .servico-item:hover { background: var(--dark2); }
+  .servico-num { font-family: 'Playfair Display', serif; font-size: 0.75rem; font-weight: 600; color: var(--gold); opacity: 0.5; letter-spacing: 0.1em; margin-bottom: 1.2rem; }
+  .servico-icon { font-size: 1.8rem; margin-bottom: 1rem; }
+  .servico-title { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 600; color: var(--cream); margin-bottom: 0.8rem; }
+  .servico-desc { font-size: 0.83rem; line-height: 1.7; color: rgba(245,240,232,0.5); }
+  .dtf-spotlight { background: rgba(201,168,76,0.06); border: 1px solid rgba(201,168,76,0.2); border-radius: 3px; padding: 3rem; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 3rem; margin-top: 1.5rem; }
+  .dtf-badge { display: inline-block; background: var(--gold); color: var(--black); font-size: 0.65rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; padding: 5px 12px; border-radius: 2px; margin-bottom: 1rem; }
+  .dtf-title { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 600; color: var(--cream); margin-bottom: 0.8rem; }
+  .dtf-desc { font-size: 0.88rem; line-height: 1.8; color: rgba(245,240,232,0.6); max-width: 480px; }
+  .dtf-features { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .dtf-features li { font-size: 0.8rem; color: rgba(245,240,232,0.7); display: flex; align-items: center; gap: 8px; }
+  .dtf-features li::before { content: '✦'; color: var(--gold); font-size: 0.5rem; }
+
+  #diferenciais { background: var(--black); }
+  .diferenciais-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5px; margin-top: 4rem; background: rgba(201,168,76,0.06); }
+  .diferencial-item { background: var(--black); padding: 3rem 2rem; text-align: center; transition: background 0.3s; }
+  .diferencial-item:hover { background: rgba(201,168,76,0.04); }
+  .diferencial-item-icon { font-size: 2rem; margin-bottom: 1.2rem; }
+  .diferencial-item-title { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 600; color: var(--cream); margin-bottom: 0.7rem; }
+  .diferencial-item-desc { font-size: 0.8rem; line-height: 1.7; color: rgba(245,240,232,0.5); }
+
+  #contato { background: var(--dark); }
+  .contato-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start; }
+  .contato-info { display: flex; flex-direction: column; gap: 2rem; }
+  .contato-item { display: flex; gap: 1rem; align-items: flex-start; }
+  .contato-item-icon { width: 40px; height: 40px; background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.2); border-radius: 2px; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; margin-top: 2px; }
+  .contato-item-label { font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.3rem; }
+  .contato-item-value { font-size: 0.95rem; color: var(--cream); line-height: 1.5; }
+  .cta-box { background: rgba(201,168,76,0.05); border: 1px solid rgba(201,168,76,0.2); border-radius: 3px; padding: 3rem; text-align: center; }
+  .cta-title { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 600; color: var(--cream); line-height: 1.2; margin-bottom: 0.8rem; }
+  .cta-title em { color: var(--gold); font-style: italic; }
+  .cta-sub { font-size: 0.9rem; color: rgba(245,240,232,0.5); margin-bottom: 2rem; line-height: 1.6; }
+
+  footer { background: var(--black); border-top: 1px solid rgba(201,168,76,0.12); padding: 3rem 2rem; text-align: center; }
+  .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 600; color: var(--gold); margin-bottom: 0.5rem; }
+  .footer-sub { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 1.5rem; }
+  .footer-links { display: flex; align-items: center; justify-content: center; gap: 2rem; list-style: none; margin-bottom: 1.5rem; flex-wrap: wrap; }
+  .footer-links a { font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; transition: color 0.3s; }
+  .footer-links a:hover { color: var(--gold); }
+  .footer-copy { font-size: 0.72rem; color: rgba(136,136,128,0.4); }
+
+  .btn-gold { display: inline-flex; align-items: center; gap: 8px; background: var(--gold); color: var(--black); padding: 0.85rem 2rem; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; border: none; cursor: pointer; border-radius: 2px; transition: all 0.3s; }
+  .btn-gold:hover { background: var(--gold-light); transform: translateY(-2px); }
+  .btn-outline { display: inline-flex; align-items: center; background: transparent; color: var(--cream); border: 1px solid rgba(245,240,232,0.3); padding: 0.85rem 2rem; font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; border-radius: 2px; transition: all 0.3s; }
+  .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+  .wa-float { position: fixed; bottom: 2rem; right: 2rem; z-index: 200; width: 56px; height: 56px; background: #25D366; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(37,211,102,0.4); text-decoration: none; transition: transform 0.3s; animation: waPulse 2.5s ease-in-out infinite; }
+  .wa-float:hover { transform: scale(1.1); animation: none; }
+  .wa-float svg { width: 28px; height: 28px; }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes scrollPulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.2; } }
+  @keyframes waPulse { 0%, 100% { box-shadow: 0 4px 20px rgba(37,211,102,0.4); } 50% { box-shadow: 0 4px 35px rgba(37,211,102,0.65); } }
+  .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  #designer { background: var(--dark2); }
+  input[type="range"] { width: 100%; height: 6px; background: rgba(201,168,76,0.2); border-radius: 3px; outline: none; appearance: none; -webkit-appearance: none; cursor: pointer; }
+  input[type="range"]::-webkit-slider-thumb { appearance: none; width: 18px; height: 18px; border-radius: 50%; background: var(--gold); cursor: pointer; }
+  input[type="range"]::-moz-range-thumb { width: 18px; height: 18px; border-radius: 50%; background: var(--gold); cursor: pointer; border: none; }
+  .cor-preset { transition: all 0.2s ease; }
+  .cor-preset:hover { transform: scale(1.1); }
+
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    nav.scrolled { padding: 0.8rem 1.5rem; }
+    .nav-links { display: none; }
+    .sobre-grid, .malhas-header, .contato-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .malhas-grid { grid-template-columns: 1fr 1fr; }
+    .servicos-grid { grid-template-columns: 1fr 1fr; }
+    .dtf-spotlight { grid-template-columns: 1fr; gap: 2rem; }
+    .diferenciais-grid { grid-template-columns: 1fr 1fr; }
+    section { padding: 5rem 1.5rem; }
+    #designer .designer-grid { grid-template-columns: 1fr !important; }
+  }
+  @media (max-width: 600px) {
+    .malhas-grid, .servicos-grid { grid-template-columns: 1fr; }
+    .sobre-diferenciais { grid-template-columns: 1fr; }
+    .hero-title { font-size: 2.4rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav id="navbar">
+  <a href="#inicio" class="nav-logo">
+    <svg viewBox="0 0 44 44" fill="none"><text x="2" y="36" font-family="'Playfair Display', serif" font-size="34" font-weight="700" fill="#C9A84C" font-style="italic">MQ</text></svg>
+    <div>
+      <div class="nav-logo-title">Malharia Queiroz</div>
+      <div class="nav-logo-sub">Uniformes Premium</div>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#sobre">Sobre</a></li>
+    <li><a href="#malhas">Malhas</a></li>
+    <li><a href="#servicos">Serviços</a></li>
+    <li><a href="#designer">Designer</a></li>
+    <li><a href="#contato">Contato</a></li>
+    <li><a href="https://wa.me/5594991322940" target="_blank" class="nav-cta">Orçamento</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="inicio" style="padding-top:0;">
+  <div class="hero-bg"></div>
+  <div class="hero-line"></div>
+  <div class="hero-content">
+    <div class="hero-tag">São Félix do Xingu · Pará · Brasil</div>
+    <div class="hero-logo-big">
+      <svg viewBox="0 0 120 120" fill="none">
+        <text x="4" y="80" font-family="Georgia, serif" font-size="68" font-weight="700" fill="#C9A84C" font-style="italic" opacity="0.9">M</text>
+        <text x="52" y="95" font-family="Georgia, serif" font-size="80" font-weight="700" fill="#C9A84C">Q</text>
+        <line x1="98" y1="88" x2="112" y2="105" stroke="#C9A84C" stroke-width="3" stroke-linecap="round" opacity="0.8"/>
+      </svg>
+    </div>
+    <h1 class="hero-title">Uniformes &amp; Camisetas<br><em>Premium</em></h1>
+    <p class="hero-sub">Malhas de alta qualidade, estampas DTF com cores ultra-vibrantes,<br>feitas sob medida para sua empresa, equipe ou evento.</p>
+    <div class="hero-actions">
+      <a href="https://wa.me/5594991322940" target="_blank" class="btn-gold">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Pedir Orçamento
+      </a>
+      <a href="#servicos" class="btn-outline">Ver Serviços</a>
+    </div>
+  </div>
+  <div class="hero-scroll"><div class="scroll-line"></div><span>Scroll</span></div>
+</section>
+
+<!-- SOBRE -->
+<section id="sobre">
+  <div class="container">
+    <div class="sobre-grid">
+      <div>
+        <div class="section-tag reveal">Sobre Nós</div>
+        <h2 class="section-title reveal">Qualidade que <em>veste</em><br>sua identidade</h2>
+        <p class="section-desc reveal">A Malharia Queiroz é especializada na confecção de camisetas e uniformes com malhas premium. Usamos tecnologia DTF para estampas com cores ultra-vibrantes e alta durabilidade. Atendemos empresas, times esportivos, eventos e pedidos personalizados em toda a região do Xingu.</p>
+        <div class="sobre-diferenciais reveal" style="margin-top:2.5rem;">
+          <div class="diferencial-card"><div class="diferencial-icon">🧵</div><div class="diferencial-title">Malha Premium</div><div class="diferencial-desc">Selecionamos os melhores tecidos do mercado</div></div>
+          <div class="diferencial-card"><div class="diferencial-icon">🎨</div><div class="diferencial-title">DTF Vibrante</div><div class="diferencial-desc">Estampas que não desbotam nem racham</div></div>
+          <div class="diferencial-card"><div class="diferencial-icon">✂️</div><div class="diferencial-title">Sob Medida</div><div class="diferencial-desc">Do molde à entrega com o seu estilo</div></div>
+          <div class="diferencial-card"><div class="diferencial-icon">📦</div><div class="diferencial-title">Entrega Rápida</div><div class="diferencial-desc">Para toda a região do Xingu</div></div>
+        </div>
+      </div>
+      <div class="reveal">
+        <div class="sobre-box">
+          <div class="sobre-stat"><div class="sobre-stat-num">100%</div><div class="sobre-stat-label">Compromisso com qualidade</div></div>
+          <div class="sobre-stat"><div class="sobre-stat-num">DTF</div><div class="sobre-stat-label">Tecnologia de estamparia premium</div></div>
+          <div class="sobre-stat"><div class="sobre-stat-num">5+</div><div class="sobre-stat-label">Tipos de malha disponíveis</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MALHAS -->
+<section id="malhas">
+  <div class="container">
+    <div class="malhas-header">
+      <div><div class="section-tag reveal">Materiais</div><h2 class="section-title reveal">Nossas <em>Malhas</em></h2></div>
+      <p class="section-desc reveal" style="align-self:end;">Trabalhamos com os melhores tecidos do mercado, escolhidos para garantir conforto, durabilidade e aparência impecável em cada peça.</p>
+    </div>
+    <div class="malhas-grid">
+      <div class="malha-card reveal"><div class="malha-num">01</div><div class="malha-name">Algodão Penteado</div><div class="malha-comp">100% Algodão · Fio 30.1 · 180g/m²</div><div class="malha-desc">O mais macio e confortável. Fio penteado garante superfície uniforme, durabilidade superior e toque premium.</div><div class="malha-tags"><span class="malha-tag">Silk</span><span class="malha-tag">DTF</span><span class="malha-tag">Bordado</span></div></div>
+      <div class="malha-card reveal"><div class="malha-num">02</div><div class="malha-name">Dry Fit</div><div class="malha-comp">100% Poliéster · Tecnologia Esportiva</div><div class="malha-desc">Absorve e evapora o suor rapidamente. Ideal para uniformes esportivos, times de futebol e eventos ao ar livre.</div><div class="malha-tags"><span class="malha-tag">Sublimação</span><span class="malha-tag">DTF</span><span class="malha-tag">Esporte</span></div></div>
+      <div class="malha-card reveal"><div class="malha-num">03</div><div class="malha-name">Malha PV</div><div class="malha-comp">67% Poliéster + 33% Viscose</div><div class="malha-desc">Não amassa, seca rápido e tem excelente custo-benefício. Muito usada em uniformes corporativos e escolares.</div><div class="malha-tags"><span class="malha-tag">Corporativo</span><span class="malha-tag">Escolar</span><span class="malha-tag">DTF</span></div></div>
+      <div class="malha-card reveal"><div class="malha-num">04</div><div class="malha-name">Piquet (Polo)</div><div class="malha-comp">50% Algodão + 50% Poliéster · 220g/m²</div><div class="malha-desc">Toque sofisticado com ótima durabilidade. Perfeito para uniformes de alto padrão e ambientes formais.</div><div class="malha-tags"><span class="malha-tag">Premium</span><span class="malha-tag">Polo</span><span class="malha-tag">Bordado</span></div></div>
+      <div class="malha-card reveal"><div class="malha-num">05</div><div class="malha-name">Sublimática</div><div class="malha-comp">100% Poliéster Sublimático</div><div class="malha-desc">Desenvolvida para receber estampagem por sublimação em toda a peça. Cores vibrantes que nunca descascam.</div><div class="malha-tags"><span class="malha-tag">Sublimação Total</span><span class="malha-tag">Eventos</span></div></div>
+      <div class="malha-card reveal" style="background:rgba(201,168,76,0.04); border:1px solid rgba(201,168,76,0.15);"><div class="malha-num" style="color:rgba(201,168,76,0.4);">?</div><div class="malha-name">Não sabe qual escolher?</div><div class="malha-comp">Consultoria Gratuita</div><div class="malha-desc">Fale conosco pelo WhatsApp. Nosso time te ajuda a escolher a malha ideal para o seu projeto e orçamento.</div><div style="margin-top:1.2rem;"><a href="https://wa.me/5594991322940" target="_blank" class="btn-gold" style="font-size:0.72rem; padding:0.6rem 1.2rem;">Consultar agora</a></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVIÇOS -->
+<section id="servicos">
+  <div class="container">
+    <div style="margin-bottom:4rem;"><div class="section-tag reveal">O que fazemos</div><h2 class="section-title reveal">Nossos <em>Serviços</em></h2></div>
+    <div class="servicos-grid">
+      <div class="servico-item reveal"><div class="servico-num">01</div><div class="servico-icon">👕</div><div class="servico-title">Camisetas Personalizadas</div><div class="servico-desc">Camisetas únicas para seu estilo, marca ou evento. Estampas DTF, silk ou bordado com alta qualidade.</div></div>
+      <div class="servico-item reveal"><div class="servico-num">02</div><div class="servico-icon">🏢</div><div class="servico-title">Uniformes Corporativos</div><div class="servico-desc">Vista sua equipe com profissionalismo. Uniformes com identidade visual da sua empresa.</div></div>
+      <div class="servico-item reveal"><div class="servico-num">03</div><div class="servico-icon">⚽</div><div class="servico-title">Uniformes Esportivos</div><div class="servico-desc">Kits completos para times de futebol, vôlei e outros esportes. Malha dry fit com estampa vibrante.</div></div>
+      <div class="servico-item reveal"><div class="servico-num">04</div><div class="servico-icon">🎓</div><div class="servico-title">Uniformes Escolares</div><div class="servico-desc">Peças duráveis, confortáveis e acessíveis para escolas e cursos.</div></div>
+      <div class="servico-item reveal"><div class="servico-num">05</div><div class="servico-icon">🎉</div><div class="servico-title">Eventos &amp; Abadás</div><div class="servico-desc">Camisetas para festas, shows, feiras e comemorações. Produção ágil para grandes quantidades.</div></div>
+      <div class="servico-item reveal"><div class="servico-num">06</div><div class="servico-icon">📦</div><div class="servico-title">Pedidos em Atacado</div><div class="servico-desc">Condições especiais para pedidos em grande quantidade. Orçamento personalizado.</div></div>
+    </div>
+    <div class="dtf-spotlight reveal">
+      <div>
+        <span class="dtf-badge">Destaque</span>
+        <div class="dtf-title">Estampa DTF — <em>Direct to Film</em></div>
+        <p class="dtf-desc">A tecnologia mais avançada em estamparia têxtil. O DTF imprime em qualquer malha, com cores extremamente vivas, sem limitação de quantidade mínima e com durabilidade excepcional.</p>
+      </div>
+      <ul class="dtf-features">
+        <li>Funciona em qualquer tipo de malha</li>
+        <li>Cores ultra-vibrantes e duráveis</li>
+        <li>Alta resolução de imagem</li>
+        <li>Sem mínimo de peças</li>
+        <li>Toque macio, não descasca</li>
+        <li>Aceita arte complexa e fotos</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- DIFERENCIAIS -->
+<section id="diferenciais">
+  <div class="container">
+    <div style="text-align:center;">
+      <div class="section-tag reveal" style="justify-content:center;"><span>Por que nos escolher</span></div>
+      <h2 class="section-title reveal" style="text-align:center;">O padrão <em>Queiroz</em><br>de qualidade</h2>
+    </div>
+    <div class="diferenciais-grid">
+      <div class="diferencial-item reveal"><div class="diferencial-item-icon">🏆</div><div class="diferencial-item-title">Malha Premium</div><div class="diferencial-item-desc">Selecionamos apenas tecidos de alta qualidade, com gramatura ideal para cada finalidade.</div></div>
+      <div class="diferencial-item reveal"><div class="diferencial-item-icon">🎨</div><div class="diferencial-item-title">Cores Vibrantes</div><div class="diferencial-item-desc">Tecnologia DTF garante estampas com cores que impressionam e duram muito mais.</div></div>
+      <div class="diferencial-item reveal"><div class="diferencial-item-icon">🤝</div><div class="diferencial-item-title">Atendimento Humano</div><div class="diferencial-item-desc">Tratamos cada pedido com atenção personalizada, do orçamento à entrega.</div></div>
+      <div class="diferencial-item reveal"><div class="diferencial-item-icon">📍</div><div class="diferencial-item-title">Região do Xingu</div><div class="diferencial-item-desc">Atendemos toda a região de São Félix do Xingu e arredores com agilidade.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTATO -->
+<section id="contato">
+  <div class="container">
+    <div class="contato-grid">
+      <div>
+        <div class="section-tag reveal">Fale Conosco</div>
+        <h2 class="section-title reveal">Vamos criar<br>algo <em>único</em></h2>
+        <p class="section-desc reveal" style="margin-bottom:3rem;">Entre em contato e receba um orçamento personalizado. Respondemos rápido pelo WhatsApp!</p>
+        <div class="contato-info">
+          <div class="contato-item reveal"><div class="contato-item-icon">📱</div><div><div class="contato-item-label">WhatsApp</div><div class="contato-item-value"><a href="https://wa.me/5594991322940" target="_blank" style="color:var(--gold);text-decoration:none;">(94) 99132-2940</a></div></div></div>
+          <div class="contato-item reveal"><div class="contato-item-icon">📸</div><div><div class="contato-item-label">Instagram</div><div class="contato-item-value"><a href="https://www.instagram.com/malhariaqueiroz2024" target="_blank" style="color:var(--gold);text-decoration:none;">@malhariaqueiroz2024</a></div></div></div>
+          <div class="contato-item reveal"><div class="contato-item-icon">✉️</div><div><div class="contato-item-label">E-mail</div><div class="contato-item-value">malharia.queiroz03@gmail.com</div></div></div>
+          <div class="contato-item reveal"><div class="contato-item-icon">📍</div><div><div class="contato-item-label">Endereço</div><div class="contato-item-value">Vila Taboca, São Félix do Xingu - PA<br>Rua Belo Horizonte, setor Minas Gerais<br><span style="color:var(--text-muted);font-size:0.82rem;">Em frente à loja Skay Net</span></div></div></div>
+        </div>
+      </div>
+      <div class="cta-box reveal">
+        <div style="font-size:3rem;margin-bottom:1rem;">✦</div>
+        <div class="cta-title">Pronto para pedir<br>seu <em>uniforme</em>?</div>
+        <p class="cta-sub">Fale com a gente agora mesmo e receba seu orçamento em minutos. Sem compromisso!</p>
+        <a href="https://wa.me/5594991322940" target="_blank" class="btn-gold" style="width:100%;justify-content:center;font-size:0.85rem;padding:1rem 2rem;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Falar no WhatsApp agora
+        </a>
+        <p style="margin-top:1rem;font-size:0.72rem;color:var(--text-muted);">Respondemos em até 1 hora nos dias úteis</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DESIGNER -->
+<section id="designer" style="padding: 7rem 2rem;">
+  <div class="container">
+    <div style="text-align:center; margin-bottom:4rem;">
+      <div class="section-tag reveal" style="justify-content:center;"><span>Ferramenta Interativa</span></div>
+      <h2 class="section-title reveal" style="text-align:center;">Crie seu <em>Design</em><br>de Camisa Agora</h2>
+      <p class="section-desc reveal" style="text-align:center; margin: 0 auto;">Use nossa ferramenta gratuita para visualizar seu design em tempo real antes de fazer seu pedido!</p>
+    </div>
+    <div class="designer-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start;">
+      <div class="reveal" style="background: var(--dark3); padding: 2rem; border-radius: 8px; border: 1px solid rgba(201,168,76,0.15);">
+        <div style="text-align:center; margin-bottom:1.5rem;"><h3 style="color: var(--cream); font-size: 0.9rem; letter-spacing: 0.1em; text-transform: uppercase;">Pré-Visualização</h3></div>
+        <canvas id="designCanvas" width="500" height="600" style="width: 100%; height: auto; background: white; border: 2px solid rgba(201,168,76,0.2); border-radius: 4px; display: block;"></canvas>
+        <div style="display: flex; gap: 1rem; margin-top: 1.5rem; flex-wrap: wrap;">
+          <button id="btnBaixarDesign" class="btn-gold" style="flex: 1; font-size: 0.75rem; padding: 0.7rem;">📥 Baixar Design</button>
+          <button id="btnCompartilharDesign" class="btn-gold" style="flex: 1; font-size: 0.75rem; padding: 0.7rem;">📤 Compartilhar</button>
+          <button id="btnResetearDesign" class="btn-outline" style="flex: 1; font-size: 0.75rem; padding: 0.7rem;">🔄 Resetar</button>
+        </div>
+      </div>
+      <div class="reveal">
+        <div style="background: var(--dark3); padding: 2.5rem; border-radius: 8px; border: 1px solid rgba(201,168,76,0.15);">
+          <div style="margin-bottom:2rem;">
+            <label style="display:block; color:var(--gold); font-size:0.75rem; letter-spacing:0.15em; text-transform:uppercase; margin-bottom:0.8rem; font-weight:600;">Cor da Camisa</label>
+            <div style="display:flex; gap:1rem; align-items:center;">
+              <input type="color" id="corCamisa" value="#FFFFFF" style="width:60px; height:50px; border:none; border-radius:4px; cursor:pointer;">
+              <div style="flex:1; display:grid; grid-template-columns:repeat(4,1fr); gap:8px;">
+                <button class="cor-preset" style="background:#FFFFFF; border:2px solid var(--gold); border-radius:4px; height:40px; cursor:pointer;" onclick="setCor('#FFFFFF')"></button>
+                <button class="cor-preset" style="background:#000000; border:2px solid #333; border-radius:4px; height:40px; cursor:pointer;" onclick="setCor('#000000')"></button>
+                <button class="cor-preset" style="background:#FF0000; border:2px solid #333; border-radius:4px; height:40px; cursor:pointer;" onclick="setCor('#FF0000')"></button>
+                <button class="cor-preset" style="background:#0066FF; border:2px solid #333; border-radius:4px; height:40px; cursor:pointer;" onclick="setCor('#0066FF')"></button>
+                <button class="cor-preset" style="background:#00CC00; border:2px solid #333; border-radius:4px; height:40px; cursor:pointer;" onclick="setCor('#00CC00')"></button>
+                <button class="cor-preset" style="background:#FFFF00; border:2px solid #333; border-radius:4px; height:40px; cursor:pointer;" onclick="setCor('#FFFF00')"></button>
+                <button class="cor-preset" style="background:#FF6600; border:2px solid #333; border-radius:4px; height:40px; cursor:pointer;" onclick="setCor('#FF6600')"></button>
+                <button class="cor-preset" style="background:#FF00FF; border:2px solid #333; border-radius:4px; height:40px; cursor:pointer;" onclick="setCor('#FF00FF')"></button>
+              </div>
+            </div>
+          </div>
+          <div style="margin-bottom:2rem;">
+            <label style="display:block; color:var(--gold); font-size:0.75rem; letter-spacing:0.15em; text-transform:uppercase; margin-bottom:0.8rem; font-weight:600;">Enviar Imagem/Logo</label>
+            <input type="file" id="uploadImagem" accept="image/*" style="width:100%; padding:10px; border:1px dashed rgba(201,168,76,0.3); border-radius:4px; background:rgba(201,168,76,0.05); color:var(--cream); cursor:pointer;">
+            <p style="font-size:0.7rem; color:var(--text-muted); margin-top:0.5rem;">PNG ou JPG (máx 5MB) - Fundo transparente recomendado</p>
+          </div>
+          <div style="margin-bottom:1.5rem;"><label style="display:block; color:var(--cream); font-size:0.8rem; margin-bottom:0.5rem;">Posição Horizontal (X): <span id="valPosX" style="color:var(--gold);">150</span>px</label><input type="range" id="posX" min="0" max="400" value="150"></div>
+          <div style="margin-bottom:1.5rem;"><label style="display:block; color:var(--cream); font-size:0.8rem; margin-bottom:0.5rem;">Posição Vertical (Y): <span id="valPosY" style="color:var(--gold);">150</span>px</label><input type="range" id="posY" min="0" max="500" value="150"></div>
+          <div style="margin-bottom:1.5rem;"><label style="display:block; color:var(--cream); font-size:0.8rem; margin-bottom:0.5rem;">Tamanho da Imagem: <span id="valTamanho" style="color:var(--gold);">200</span>px</label><input type="range" id="tamanhoImagem" min="50" max="400" value="200"></div>
+          <div style="margin-bottom:1.5rem;"><label style="display:block; color:var(--cream); font-size:0.8rem; margin-bottom:0.5rem;">Rotação: <span id="valRotacao" style="color:var(--gold);">0</span>°</label><input type="range" id="rotacao" min="0" max="360" value="0"></div>
+          <div style="margin-bottom:1.5rem;">
+            <label style="display:block; color:var(--gold); font-size:0.75rem; letter-spacing:0.15em; text-transform:uppercase; margin-bottom:0.8rem; font-weight:600;">Texto da Camisa</label>
+            <input type="text" id="textoCamisa" placeholder="Seu texto aqui" value="SEU TEXTO" style="width:100%; padding:10px; background:rgba(201,168,76,0.05); border:1px solid rgba(201,168,76,0.2); border-radius:4px; color:var(--cream); font-size:0.9rem;">
+          </div>
+          <div style="margin-bottom:1.5rem;">
+            <label style="display:block; color:var(--gold); font-size:0.75rem; letter-spacing:0.15em; text-transform:uppercase; margin-bottom:0.8rem; font-weight:600;">Cor do Texto</label>
+            <input type="color" id="corTexto" value="#000000" style="width:100%; height:50px; border:none; border-radius:4px; cursor:pointer;">
+          </div>
+          <div style="margin-bottom:1.5rem;"><label style="display:block; color:var(--cream); font-size:0.8rem; margin-bottom:0.5rem;">Tamanho do Texto: <span id="valTamanhoTexto" style="color:var(--gold);">30</span>px</label><input type="range" id="tamanhoTexto" min="12" max="60" value="30"></div>
+          <p style="font-size:0.7rem; color:var(--text-muted); text-align:center; margin-top:1rem;">Gostou do design? Converse conosco para providenciar a estampa DTF!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">Malharia Queiroz</div>
+  <div class="footer-sub">Uniformes &amp; Camisetas Premium · São Félix do Xingu · PA</div>
+  <ul class="footer-links">
+    <li><a href="#sobre">Sobre</a></li>
+    <li><a href="#malhas">Malhas</a></li>
+    <li><a href="#servicos">Serviços</a></li>
+    <li><a href="#designer">Designer</a></li>
+    <li><a href="#contato">Contato</a></li>
+    <li><a href="https://wa.me/5594991322940" target="_blank">WhatsApp</a></li>
+    <li><a href="https://www.instagram.com/malhariaqueiroz2024" target="_blank">Instagram</a></li>
+  </ul>
+  <div class="footer-copy">© 2025 Malharia Queiroz · Todos os direitos reservados</div>
+</footer>
+
+<a href="https://www.instagram.com/malhariaqueiroz2024" target="_blank" style="position:fixed; bottom:70px; right:2rem; z-index:200; width:56px; height:56px; background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); border-radius:50%; display:flex; align-items:center; justify-content:center; box-shadow:0 4px 20px rgba(220,39,67,0.4); text-decoration:none;" title="Instagram">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="white"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+</a>
+
+<a href="https://wa.me/5594991322940" target="_blank" class="wa-float" title="Falar no WhatsApp">
+  <svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script>
+  // Navbar scroll
+  const nav = document.getElementById('navbar');
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 60));
+
+  // Reveal on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => { if (e.isIntersecting) { setTimeout(() => e.target.classList.add('visible'), i * 80); observer.unobserve(e.target); } });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Cor preset helper
+  function setCor(hex) {
+    const el = document.getElementById('corCamisa');
+    el.value = hex;
+    el.dispatchEvent(new Event('change'));
+  }
+
+  // Slider labels
+  document.getElementById('posX').addEventListener('input', e => document.getElementById('valPosX').textContent = e.target.value);
+  document.getElementById('posY').addEventListener('input', e => document.getElementById('valPosY').textContent = e.target.value);
+  document.getElementById('tamanhoImagem').addEventListener('input', e => document.getElementById('valTamanho').textContent = e.target.value);
+  document.getElementById('rotacao').addEventListener('input', e => document.getElementById('valRotacao').textContent = e.target.value);
+  document.getElementById('tamanhoTexto').addEventListener('input', e => document.getElementById('valTamanhoTexto').textContent = e.target.value);
+
+  // Designer
+  class DesignadorCamisa {
+    constructor() {
+      this.canvas = document.getElementById('designCanvas');
+      this.ctx = this.canvas?.getContext('2d');
+      this.corCamisa = '#FFFFFF'; this.imagemUpload = null;
+      this.posX = 150; this.posY = 150; this.tamanhoImagem = 200;
+      this.rotacao = 0; this.texto = 'SEU TEXTO';
+      this.corTexto = '#000000'; this.tamanhoTexto = 30;
+      if (this.canvas) { this.setupEvents(); this.draw(); }
+    }
+    setupEvents() {
+      document.getElementById('corCamisa').addEventListener('change', e => { this.corCamisa = e.target.value; this.draw(); });
+      document.getElementById('uploadImagem').addEventListener('change', e => {
+        const f = e.target.files[0];
+        if (f) { const r = new FileReader(); r.onload = ev => { const img = new Image(); img.onload = () => { this.imagemUpload = img; this.draw(); }; img.src = ev.target.result; }; r.readAsDataURL(f); }
+      });
+      document.getElementById('posX').addEventListener('input', e => { this.posX = +e.target.value; this.draw(); });
+      document.getElementById('posY').addEventListener('input', e => { this.posY = +e.target.value; this.draw(); });
+      document.getElementById('tamanhoImagem').addEventListener('input', e => { this.tamanhoImagem = +e.target.value; this.draw(); });
+      document.getElementById('rotacao').addEventListener('input', e => { this.rotacao = +e.target.value; this.draw(); });
+      document.getElementById('textoCamisa').addEventListener('input', e => { this.texto = e.target.value.toUpperCase(); this.draw(); });
+      document.getElementById('corTexto').addEventListener('change', e => { this.corTexto = e.target.value; this.draw(); });
+      document.getElementById('tamanhoTexto').addEventListener('input', e => { this.tamanhoTexto = +e.target.value; this.draw(); });
+      document.getElementById('btnBaixarDesign').addEventListener('click', () => { const a = document.createElement('a'); a.download = 'design-camisa.png'; a.href = this.canvas.toDataURL(); a.click(); });
+      document.getElementById('btnCompartilharDesign').addEventListener('click', () => { window.open(`https://wa.me/?text=${encodeURIComponent('Confira meu design criado na Malharia Queiroz! 👕')}`, '_blank'); });
+      document.getElementById('btnResetearDesign').addEventListener('click', () => this.reset());
+    }
+    draw() {
+      if (!this.ctx) return;
+      const {width, height} = this.canvas;
+      this.ctx.fillStyle = this.corCamisa; this.ctx.fillRect(0, 0, width, height);
+      this.ctx.strokeStyle = '#CCC'; this.ctx.lineWidth = 2; this.ctx.strokeRect(0, 0, width, height);
+      this.ctx.fillStyle = this.corCamisa; this.ctx.beginPath(); this.ctx.arc(width/2, 80, 40, 0, Math.PI, false); this.ctx.fill();
+      if (this.imagemUpload) {
+        this.ctx.save();
+        this.ctx.translate(this.posX + this.tamanhoImagem/2, this.posY + this.tamanhoImagem/2);
+        this.ctx.rotate(this.rotacao * Math.PI / 180);
+        this.ctx.drawImage(this.imagemUpload, -this.tamanhoImagem/2, -this.tamanhoImagem/2, this.tamanhoImagem, this.tamanhoImagem);
+        this.ctx.restore();
+      }
+      this.ctx.fillStyle = this.corTexto;
+      this.ctx.font = `bold ${this.tamanhoTexto}px Arial`;
+      this.ctx.textAlign = 'center';
+      this.ctx.fillText(this.texto, width/2, height - 60);
+    }
+    reset() {
+      this.corCamisa='#FFFFFF'; this.imagemUpload=null; this.posX=150; this.posY=150;
+      this.tamanhoImagem=200; this.rotacao=0; this.texto='SEU TEXTO'; this.corTexto='#000000'; this.tamanhoTexto=30;
+      document.getElementById('corCamisa').value='#FFFFFF';
+      document.getElementById('posX').value=150; document.getElementById('valPosX').textContent=150;
+      document.getElementById('posY').value=150; document.getElementById('valPosY').textContent=150;
+      document.getElementById('tamanhoImagem').value=200; document.getElementById('valTamanho').textContent=200;
+      document.getElementById('rotacao').value=0; document.getElementById('valRotacao').textContent=0;
+      document.getElementById('textoCamisa').value='SEU TEXTO';
+      document.getElementById('corTexto').value='#000000';
+      document.getElementById('tamanhoTexto').value=30; document.getElementById('valTamanhoTexto').textContent=30;
+      this.draw();
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => { window.designador = new DesignadorCamisa(); });
+</script>
+</body>
+</html>
